@@ -9,10 +9,9 @@ load_dotenv()
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.display.set_caption(os.getenv('TITLE'))
         self.screen = pygame.display.set_mode((int(os.getenv('WIDTH')), int(os.getenv('HEIGHT'))))
         self.clock = pygame.time.Clock()
-        self.dt = 0
-        self.player_pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
 
     def run(self):
         while True:
@@ -21,21 +20,9 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.fill('black')
-            pygame.draw.circle(self.screen, 'red', self.player_pos, 40)
-            keys = pygame.key.get_pressed()
-
-            if keys[pygame.K_w]:
-                self.player_pos.y -= 300 * self.dt
-            if keys[pygame.K_s]:
-                self.player_pos.y += 300 * self.dt
-            if keys[pygame.K_a]:
-                self.player_pos.x -= 300 * self.dt
-            if keys[pygame.K_d]:
-                self.player_pos.x += 300 * self.dt
-
-            pygame.display.flip()
-            self.dt = self.clock.tick(int(os.getenv('FPS'))) / 1000
+            self.screen.fill('Black')
+            pygame.display.update()
+            self.clock.tick(int(os.getenv('FPS')))
 
 
 if __name__ == '__main__':
