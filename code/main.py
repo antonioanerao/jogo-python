@@ -13,6 +13,7 @@ class Game:
         pygame.display.set_caption(os.getenv('TITLE'))
         self.screen = pygame.display.set_mode((int(os.getenv('WIDTH')), int(os.getenv('HEIGHT'))))
         self.clock = pygame.time.Clock()
+        self.level = Level()
 
     def run(self):
         while True:
@@ -21,9 +22,8 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.fill('Black')
-            level = Level()
-            level.run()
+            self.screen.fill('black')
+            self.level.run()
             pygame.display.update()
             self.clock.tick(int(os.getenv('FPS')))
 
