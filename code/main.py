@@ -2,6 +2,7 @@ import os
 import sys
 import pygame
 from dotenv import load_dotenv
+from level import Level
 
 load_dotenv()
 
@@ -21,6 +22,8 @@ class Game:
                     sys.exit()
 
             self.screen.fill('Black')
+            level = Level()
+            level.run()
             pygame.display.update()
             self.clock.tick(int(os.getenv('FPS')))
 
