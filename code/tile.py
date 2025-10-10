@@ -1,16 +1,15 @@
 import pygame
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, type):
+    def __init__(self, pos, groups, sprite_type, surface = pygame.Surface((int(os.getenv('TILESIZE')), int(os.getenv('TILESIZE'))))):
         super().__init__(groups)
 
-        if type == 'x':
-            self.image = pygame.image.load('../graphics/test/rock.png').convert_alpha()
-            inflate = (0, -10)
-        if type == 'z':
-            self.image = pygame.image.load('../graphics/objects/bush_simple.png').convert_alpha()
-            self.image = pygame.transform.scale2x(self.image)
-            inflate = (0, -50)
+        self.sprite_type = sprite_type
+        self.image = surface
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(inflate)
+        self.hitbox = self.rect.inflate(0, 10)

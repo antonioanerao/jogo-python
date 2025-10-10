@@ -1,8 +1,12 @@
 import pygame
-from settings import WORLD_MAP, TILESIZE
 from tile import Tile
 from player import Player
 from debug import debug
+import support
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Level:
@@ -14,17 +18,20 @@ class Level:
         self.create_map()
 
     def create_map(self):
-        # for row_index, row in enumerate(WORLD_MAP):
-        #     for col_index, col in enumerate(row):
-        #         x = col_index * TILESIZE
-        #         y = row_index * TILESIZE
+        layouts = {
+            'boundary': support.import_csv_layout('../map/map_FloorBlocks.csv')
+        }
 
-        #         if col == 'x':
-        #             Tile((x, y), [self.visible_sprites, self.obstables_sprites], 'x')
-        #         if col == 'z':
-        #             Tile((x, y), [self.visible_sprites, self.obstables_sprites], 'z')
-        #         if col == 'p':
-        #             self.player = Player((x, y), [self.visible_sprites], self.obstables_sprites)
+        for style, layout in layouts.items():
+            for row_index, row in enumerate(layout):
+                for col_index, col in enumerate(row):
+                    if col != '-1':
+                        x = col_index * int(os.getenv('TILESIZE'))
+                        y = row_index * int(os.getenv('TILESIZE'))
+
+                        if style == 'boundary':
+                            Tile((x, y), [self.obstables_sprites], 'invisible')
+
         self.player = Player((1920, 1310), [self.visible_sprites], self.obstables_sprites)
 
     def run(self):
