@@ -20,7 +20,9 @@ class Level:
                 y = row_index * TILESIZE
 
                 if col == 'x':
-                    Tile((x, y), [self.visible_sprites, self.obstables_sprites])
+                    Tile((x, y), [self.visible_sprites, self.obstables_sprites], 'x')
+                if col == 'z':
+                    Tile((x, y), [self.visible_sprites, self.obstables_sprites], 'z')
                 if col == 'p':
                     self.player = Player((x, y), [self.visible_sprites], self.obstables_sprites)
 
