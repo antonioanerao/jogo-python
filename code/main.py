@@ -1,8 +1,8 @@
-import os
-import sys
 import pygame
+import sys
 from dotenv import load_dotenv
 from level import Level
+import settings
 
 load_dotenv()
 
@@ -10,8 +10,8 @@ load_dotenv()
 class Game:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption(os.getenv('TITLE'))
-        self.screen = pygame.display.set_mode((int(os.getenv('WIDTH')), int(os.getenv('HEIGHT'))))
+        pygame.display.set_caption(settings.TITLE)
+        self.screen = pygame.display.set_mode((int(settings.WIDTH), int(settings.HEIGHT)))
         self.clock = pygame.time.Clock()
         self.level = Level()
 
@@ -25,7 +25,7 @@ class Game:
             self.screen.fill('black')
             self.level.run()
             pygame.display.update()
-            self.clock.tick(int(os.getenv('FPS')))
+            self.clock.tick(int(settings.FPS))
 
 
 if __name__ == '__main__':

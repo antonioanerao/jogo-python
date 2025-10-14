@@ -1,10 +1,10 @@
 import pygame
+from dotenv import load_dotenv
 from tile import Tile
 from player import Player
 from debug import debug
 import support
-import os
-from dotenv import load_dotenv
+import settings
 
 load_dotenv()
 
@@ -26,8 +26,8 @@ class Level:
             for row_index, row in enumerate(layout):
                 for col_index, col in enumerate(row):
                     if col != '-1':
-                        x = col_index * int(os.getenv('TILESIZE'))
-                        y = row_index * int(os.getenv('TILESIZE'))
+                        x = col_index * int(settings.TILESIZE)
+                        y = row_index * int(settings.TILESIZE)
 
                         if style == 'boundary':
                             Tile((x, y), [self.obstables_sprites], 'invisible')

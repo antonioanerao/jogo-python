@@ -1,12 +1,12 @@
 import pygame
-import os
 from dotenv import load_dotenv
+import settings
 
 load_dotenv()
 
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, sprite_type, surface = pygame.Surface((int(os.getenv('TILESIZE')), int(os.getenv('TILESIZE'))))):
+    def __init__(self, pos, groups, sprite_type, surface = pygame.Surface((int(settings.TILESIZE), int(settings.TILESIZE)))):
         super().__init__(groups)
 
         self.sprite_type = sprite_type
